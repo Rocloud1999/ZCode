@@ -12,6 +12,7 @@
     "dev": "tsup --watch --onSuccess 'node dist/entry-http.js'",
     "build": "tsup && pnpm run build:remote",
     "build:remote": "tsx build-remote.ts",
+    "test:offpeak": "node --experimental-strip-types --test tests/off-peak/*.test.mjs",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix"
   },
