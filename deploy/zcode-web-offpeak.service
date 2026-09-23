@@ -1,0 +1,28 @@
+[Unit]
+Description=ZCode Web with experimental off-peak execution host
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=zcode
+Group=zcode
+WorkingDirectory=/opt/ZCode
+StateDirectory=zcode-web-offpeak
+StateDirectoryMode=0700
+EnvironmentFile=/etc/zcode-web-offpeak.env
+ExecStart=/usr/bin/node /opt/ZCode/packages/server/dist/entry-http.js
+Restart=on-failure
+RestartSec=5
+KillSignal=SIGTERM
+KillMode=control-group
+TimeoutStopSec=30
+UMask=0077
+NoNewPrivileges=true
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
